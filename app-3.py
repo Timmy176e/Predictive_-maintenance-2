@@ -138,7 +138,23 @@ try:
     st.write("Dataset shape:", raw_df.shape)
     st.dataframe(raw_df.head())
 
-    results = run_predictions(raw_df, models)
+    
+    st.write("CHECK 1: CSV has been loaded.")
+    st.write("CHECK 2: Input columns")
+    st.write(raw_df.columns.tolist())
+    st.write("CHECK 3: Number of rows:", len(raw_df))
+
+    import time
+    start_time = time.time()
+
+    with st.spinner("Running all four prediction models. Please wait..."):
+        results = run_predictions(raw_df, models)
+
+    elapsed = time.time() - start_time
+
+    st.success(f"CHECK 4: Predictions completed in {elapsed:.2f} seconds.")
+    st.write("CHECK 5: Prediction results shape:", results.shape)
+    
 
 except ValueError as e:
     st.error(f"Input validation failed: {e}")
