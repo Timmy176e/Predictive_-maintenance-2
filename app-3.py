@@ -99,11 +99,8 @@ try:
     with st.spinner("Loading models (first run downloads them from Google Drive)..."):
         models = load_models()
 except Exception as e:
-    st.error(
-        f"Couldn't load the models: {e}\n\n"
-        "Most likely cause: one of the Google Drive files isn't shared as "
-        "\"Anyone with the link\" (Viewer). Check sharing settings on all 4 files."
-    )
+    st.error("Failed to load models.")
+    st.exception(e)
     st.stop()
 
 with st.expander("Expected CSV columns", expanded=False):
