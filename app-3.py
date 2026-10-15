@@ -118,6 +118,16 @@ with st.expander("Expected CSV columns", expanded=False):
 
 uploaded = st.file_uploader("Upload asset data (CSV)", type=["csv"])
 
+st.write("DEBUG: CSV upload detected")
+
+df = pd.read_csv(uploaded_file)
+
+st.write("DEBUG: CSV loaded")
+st.write("Shape:", df.shape)
+st.write("Columns:", df.columns.tolist())
+st.dataframe(df.head())
+
+st.write("DEBUG: Reached prediction section")
 if uploaded is None:
     st.info("Upload a CSV to get started.")
     st.stop()
