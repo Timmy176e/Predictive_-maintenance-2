@@ -26,10 +26,10 @@ MODEL_DIR.mkdir(exist_ok=True)
 # Google Drive file IDs for each model (the id between /d/ and /view in the share link).
 # Replace these if you re-upload a retrained model to Drive later.
 MODEL_FILES = {
-    "type": ("1yF-zgkKA_fX9qPkVeMRuAL6N9EafVlwL", "maintenance_type_classifier.joblib"),
-    "risk": ("1oNpbkDPf8W5LlWumroQlBWmHgiy6K0mo", "failure_risk_regressor.joblib"),
-    "rul":  ("1BjAYSTWLqKSktTWri1mNzxSIF0mMHbcW", "rul_regressor.joblib"),
-    "due":  ("1wqk3O2bw_cTIZQw9leNhoTQ3NSv4ZxV9", "days_until_due_regressor.joblib"),
+    "type": ("https://drive.google.com/file/d/1yF-zgkKA_fX9qPkVeMRuAL6N9EafVlwL/view?usp=drivesdk", "maintenance_type_classifier.joblib"),
+    "risk": ("https://drive.google.com/file/d/1oNpbkDPf8W5LlWumroQlBWmHgiy6K0mo/view?usp=drivesdk", "failure_risk_regressor.joblib"),
+    "rul":  ("https://drive.google.com/file/d/1BjAYSTWLqKSktTWri1mNzxSIF0mMHbcW/view?usp=drivesdk", "rul_regressor.joblib"),
+    "due":  ("https://drive.google.com/file/d/1wqk3O2bw_cTIZQw9leNhoTQ3NSv4ZxV9/view?usp=drivesdk", "days_until_due_regressor.joblib"),
 }
 
 NUMERIC_FEATURES = [
