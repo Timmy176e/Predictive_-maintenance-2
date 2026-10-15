@@ -116,31 +116,38 @@ with st.expander("Expected CSV columns", expanded=False):
         with open(sample_path, "rb") as f:
             st.download_button("Download a sample CSV", f, file_name="sample_input.csv", mime="text/csv")
 
-uploaded = st.file_uploader("Upload asset data (CSV)", type=["csv"])
 
-st.write("DEBUG: CSV upload detected")
+uploaded = st.file_uploader(
+    "Upload asset data (CSV)",
+    type=["csv"],
+    key="maintenance_csv"
+)
 
-df = pd.read_csv(uploaded_file)
-
-st.write("DEBUG: CSV loaded")
-st.write("Shape:", df.shape)
-st.write("Columns:", df.columns.tolist())
-st.dataframe(df.head())
-
-st.write("DEBUG: Reached prediction section")
 if uploaded is None:
     st.info("Upload a CSV to get started.")
     st.stop()
 
 try:
     raw_df = pd.read_csv(uploaded)
+
+    if raw_df.empty:
+        st.error("The uploaded CSV contains no data.")
+        st.stop()
+
+    st.success("CSV loaded successfully.")
+    st.write("Dataset shape:", raw_df.shape)
+    st.dataframe(raw_df.head())
+
     results = run_predictions(raw_df, models)
+
 except ValueError as e:
-    st.error(str(e))
+    st.error(f"Input validation failed: {e}")
     st.stop()
+
 except Exception as e:
-    st.error(f"Couldn't process that file: {e}")
+    st.error(f"Couldn't process the uploaded file: {e}")
     st.stop()
+    
 
 # ---- summary cards ----
 c1, c2, c3, c4 = st.columns(4)
